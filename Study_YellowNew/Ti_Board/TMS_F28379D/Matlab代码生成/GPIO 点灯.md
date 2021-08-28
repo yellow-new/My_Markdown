@@ -1,3 +1,5 @@
+
+
 # MATLAB C2000----- 例程（一）GPIO点灯
 
 ------
@@ -6,32 +8,32 @@
 
 ## （一）模型
 
-![](C:\My_Project_Markdown\Study_YellowNew\image\MATLAB_电灯1.png)
+![](C:\My_Project_Markdown\Study_YellowNew\image\MATLAB1.png)
 
 前面模块为时间模块 后面为gpio口 设置了翻转模式 这个为最简单的模式
 
-![](C:\My_Project_Markdown\Study_YellowNew\image\MATLAB_电灯2.png)
+![](C:\My_Project_Markdown\Study_YellowNew\image\MATLAB2.png)
 
 
 
 ## （二）烧入过程
 1. "CTRL+E"打开设置
 
-![](C:\My_Project_Markdown\Study_YellowNew\image\MATLAB电灯3.png)
+![](C:\My_Project_Markdown\Study_YellowNew\image\MATLAB3.png)
 
 2. 选择一下设置之后,准备烧入板卡
 
-![](C:\My_Project_Markdown\Study_YellowNew\image\MATLAB电灯.png)
+![](C:\My_Project_Markdown\Study_YellowNew\image\MATLA.png)
 
 3. 等待一段时间会在你的工作路径下生成对应的文件当然会生成ccs代码
 
-![](C:\My_Project_Markdown\Study_YellowNew\image\MATLAB电灯4.png)
+![](C:\My_Project_Markdown\Study_YellowNew\image\MATLAB4.png)
 
 
 
 ##  （三）物理现象
 
-![](C:\My_Project_Markdown\Study_YellowNew\image\动画.gif)
+![](C:\My_Project_Markdown\Study_YellowNew\image\diandeng.gif)
 
 
 
@@ -83,24 +85,28 @@ volatile boolean_T stopRequested; //
 volatile boolean_T runModel;
 int main(void)
 {
+   //状态标志位
   float modelBaseRate = 1.0;
+    晶振时钟频率
   float systemClock = 200;
 
   /* Initialize variables */
   stopRequested = false;
   runModel = false;
+    //烧入flash
   c2000_flash_init();
+    //板子外设初始化
   init_board();
 
 #ifdef MW_EXEC_PROFILER_ON
-
+// 暂时不知道是干什么的{可能为调试}
   config_profilerTimer();
 
 #endif
 
   ;
-  rtmSetErrorStatus(c28379D_cpu1_blink_M, 0);
-  c28379D_cpu1_blink_initialize();
+  rtmSetErrorStatus(c28379D_cpu1_blink_M, 0);//初始化标志位
+  c28379D_cpu1_blink_initialize();//初始化在simulink中设置的初始化
   globalInterruptDisable();
   configureTimer0(modelBaseRate, systemClock);
   runModel =

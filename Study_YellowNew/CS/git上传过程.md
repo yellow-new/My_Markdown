@@ -22,7 +22,7 @@ fatal:remote origin already exists
 7. git push -u origin master // 把当前分支 master 推送到远程，执行此命令后有可能会让输入用户名、密码：
     
     8. 版本显示 git log
-    9.  git remote set-url origin git+ssh://git@github.com/username/reponame.git
+    9.  git remote set-url origin git+ssh://git@github.com/stevenyellow/F28335_Library.git
 
 
 ```
